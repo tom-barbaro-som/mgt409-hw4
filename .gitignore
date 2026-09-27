@@ -1,0 +1,31 @@
+# --- Secrets: never commit keys -------------------------------------------
+.env
+*.env
+.env.*
+!.env.example
+Portkey.env
+
+# --- Local-only data pack (see README "Data pack") -------------------------
+data/
+*.db
+*.sqlite
+*.sqlite3
+products/
+products_web/
+
+# --- Python ----------------------------------------------------------------
+.venv/
+__pycache__/
+*.pyc
+.ruff_cache/
+
+# --- Node / build -----------------------------------------------------------
+node_modules/
+frontend/dist/
+
+# --- OS / editor ------------------------------------------------------------
+.DS_Store
+.claude/
+
+# Only created if output/audit_trail.json were ever corrupted (see backend/agent.py)
+output/audit_trail.recovery.jsonl

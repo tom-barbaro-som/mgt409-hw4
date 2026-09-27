@@ -1,0 +1,446 @@
+/*
+ * Design tokens follow yalebulldogblue.com: Yale blue as the primary color,
+ * near-black text, a warm cream footer, and Open Sans throughout.
+ */
+:root {
+  --color-primary: #00356b;
+  --color-primary-dark: #00264d;
+  --color-primary-soft: #e7eef6;
+  --color-text: #1d1d1d;
+  --color-text-muted: #5f6368;
+  --color-border: #dddddd;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f6f6f6;
+  --color-cream: #f5f3ed;
+  --color-cream-border: #e6e1d3;
+  --color-link: #046e82;
+  --color-in-stock: #2e7d32;
+  --color-low-stock: #b45309;
+  --color-sold-out: #bf262f;
+
+  --font-sans: 'Open Sans Variable', 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 10px 28px rgb(0 32 77 / 0.12);
+  --shadow-lg: 0 18px 48px rgb(0 32 77 / 0.24);
+
+  --container-width: 1200px;
+  --header-height: 76px;
+  /* Both header rows (logo/search + category menu), for sticky offsets. */
+  --header-total: 124px;
+
+  color: var(--color-text);
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+
+/* Headings follow the reference store's theme: Open Sans, uppercase, lighter weight. */
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(1.35rem, 2.6vw, 1.95rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid #4a90d9;
+  outline-offset: 2px;
+}
+
+/* Layout helpers */
+.container {
+  width: min(100% - 2.5rem, var(--container-width));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+
+.section--cream {
+  background: var(--color-cream);
+}
+
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: 62ch;
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: transform 0.15s;
+}
+
+.text-link:hover svg {
+  transform: translateX(3px);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: #fff;
+}
+
+/* Buttons */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.button--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button--primary:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.button--outline {
+  border-color: var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.button--outline:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button--light {
+  background: #fff;
+  color: var(--color-primary);
+}
+
+.button--light:hover {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.button--ghost-light {
+  border-color: rgb(255 255 255 / 0.7);
+  background: transparent;
+  color: #fff;
+}
+
+.button--ghost-light:hover {
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+}
+
+.button--block {
+  width: 100%;
+}
+
+/* Page header band */
+.page-header {
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--color-cream-border);
+  background: var(--color-cream);
+}
+
+.page-header h1 {
+  margin-bottom: 0.35em;
+}
+
+.page-header .lead {
+  margin: 0;
+}
+
+/* Loading and error messages */
+.status-message {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+}
+
+.status-message--error {
+  border: 1px solid #f3c4c8;
+  background: #fdf0f1;
+  color: #8a1c24;
+}
+
+.status-message__detail {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* Chips */
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Forms */
+.field {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #c7c7c7;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(0 53 107 / 0.18);
+}
+
+.field__hint {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+}
+
+.form-message {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.form-message--info {
+  border: 1px solid #c9d8e8;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.form-message--error {
+  border: 1px solid #f3c4c8;
+  background: #fdf0f1;
+  color: #8a1c24;
+}
+
+/* Loading skeletons */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #eeeeee 25%, #f7f7f7 50%, #eeeeee 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s infinite linear;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * Animated underline: draws left to right over 0.5s on hover or keyboard focus, and
+ * retracts the same way. It's drawn as a background, so it follows multi-line titles
+ * line by line. Use on a link itself (a.link-underline) or on a span inside a larger
+ * link or card.
+ */
+.link-underline {
+  padding-bottom: 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 2px;
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition:
+    background-size 0.5s ease,
+    color 0.2s ease;
+}
+
+/* Any hover/focus on the enclosing link draws the line, so hovering a product card's
+   image or text underlines its name. */
+a.link-underline:hover,
+a.link-underline:focus-visible,
+a:hover .link-underline,
+a:focus-visible .link-underline {
+  background-size: 100% 2px;
+}

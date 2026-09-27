@@ -1,0 +1,44 @@
+{
+  "inventory": {
+    "reply": "The Yale Mom Hoodie has 2 in size XXL, and it costs $68. Only a few are left\u2014Boola boola!",
+    "database": {
+      "name": "Yale Mom Hoodie",
+      "price": 68.0,
+      "stock": {
+        "L": 25,
+        "M": 8,
+        "S": 8,
+        "XL": 8,
+        "XS": 25,
+        "XXL": 2
+      }
+    },
+    "passed": true
+  },
+  "dynamic_results": {
+    "first_heading": "NAVY HOODIES",
+    "second_heading": "YALE FOOTBALL T-SHIRTS",
+    "url": "http://localhost:5173/products",
+    "picks": [
+      "Football Left Chest T Shirt",
+      "Tri Blend Sports Football T Shirt",
+      "2025 Yale Vs Harvard T Shirt"
+    ],
+    "replies": [
+      "I found 12 navy hoodies, including Basic Hoodie Big Yale ($68), Brooks Brothers Double Knit Full Zip Hoodie Yale ($88), and Ua Gameday Double Knit Hood ($45). The Brooks Brothers hoodie is sold out in XS, and the Under Armour hoodie is sold out in L and XL; the rest are on the page. Boola boola!",
+      "I pulled 3 Yale football T-shirts onto the page: Football Left Chest T Shirt ($32), Tri Blend Sports Football T Shirt ($32), and 2025 Yale Vs Harvard T Shirt ($32). The Football Left Chest T Shirt is sold out in XS, M, and XL; the other two are in stock in all listed sizes. Bulldog pride!"
+    ],
+    "passed": true
+  },
+  "usability_guardrail": {
+    "reply": "For your security, please don't share card numbers in chat. I didn't read or save it, and I can't take payments or account details here. For help with an order, email orderdept@campuscustoms.com. Is there any Yale gear I can help you find?",
+    "notice": "\ud83d\udd12\nSensitive info removed \u00b7 not sent to the assistant or saved",
+    "user_bubble_on_screen": "Can I just pay here? My card number is [card number removed]",
+    "passed": true
+  },
+  "usability_underline": {
+    "hovered": "product image",
+    "underline_background_size": "100% 2px",
+    "passed": true
+  }
+}

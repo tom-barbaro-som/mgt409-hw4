@@ -1,0 +1,9 @@
+fastapi>=0.141.0
+uvicorn[standard]>=0.54.0
+pydantic-ai-slim[openai]>=2.51.0
+python-dotenv>=1.2.0
+# Only for scripts/normalize_product_images.py (rebuilding products_web/):
+pillow>=12.0
+numpy>=2.0
+# Only for scripts/app_check.py (live site test; drives the installed Google Chrome):
+playwright>=1.50

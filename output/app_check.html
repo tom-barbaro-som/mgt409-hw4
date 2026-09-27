@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Customs: Live Site Check</title>
+    <style>
+      :root {
+        --blue: #00356b;
+        --text: #1d1d1d;
+        --muted: #5f6368;
+        --cream: #f5f3ed;
+        --pass: #2e7d32;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--text);
+        font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+      }
+      header {
+        padding: 2.25rem 1.5rem 1.75rem;
+        background: var(--blue);
+        color: #fff;
+        text-align: center;
+      }
+      header h1 { margin: 0 0 0.35rem; font-size: 1.9rem; letter-spacing: 0.03em; text-transform: uppercase; }
+      header p { margin: 0; opacity: 0.9; }
+      .summary {
+        display: inline-block;
+        margin-top: 0.9rem;
+        padding: 0.3rem 0.9rem;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--pass);
+        font-weight: 700;
+      }
+      main { max-width: 1000px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+      section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #e6e1d3;
+        border-radius: 10px;
+        background: #fff;
+      }
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0 0 1rem;
+        color: var(--blue);
+        font-size: 1.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .badge {
+        padding: 0.1rem 0.6rem;
+        border-radius: 999px;
+        background: #e9f5ea;
+        color: var(--pass);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+      img { display: block; width: 100%; border: 1px solid #ddd; border-radius: 6px; }
+      img.narrow { max-width: 644px; margin: 0 auto; }
+      p.caption { margin: 1rem 0 0; }
+      footer { color: var(--muted); font-size: 0.85rem; text-align: center; }
+      code { font-size: 0.85em; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Campus Customs: Live Site Check</h1>
+      <p>Tested on the running website (http://localhost:5173) in Chrome, as a guest, September 26, 2026.</p>
+      <span class="summary">4 of 4 tests passed</span>
+    </header>
+
+    <main>
+      <section>
+        <h2>1. Chatbot checks an item's stock and price <span class="badge">PASS</span></h2>
+        <img src="app_check_images/inventory.png" alt="Chat asking how many Yale Mom Hoodies are in size XXL; the reply says $68 with 2 in XXL." />
+        <p class="caption">
+          Asked "How many Yale Mom Hoodies do you have in size XXL, and how much do they cost?" and the chatbot
+          answered <strong>$68 with 2 left in XXL</strong>. That matches <code>campus_customs.db</code> exactly
+          (price 68.0, inventory XXL = 2).
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Page results follow the chat <span class="badge">PASS</span></h2>
+        <img src="app_check_images/dynamic_results.png" alt="Products page showing 'Yale Football T-Shirts' picked by the assistant, with the chat on the right." />
+        <p class="caption">
+          After "Show me navy hoodies" filled the Products page with navy hoodies, the follow-up "Actually, show me
+          T-shirts for a Yale football fan instead" replaced them with these <strong>Yale Football T-Shirts</strong>
+          picks. Their prices and struck-through sold-out sizes (XS, M, XL on the Football Left Chest tee) match the
+          database.
+        </p>
+      </section>
+
+      <section>
+        <h2>3. Usability: sensitive-data guardrail <span class="badge">PASS</span></h2>
+        <img src="app_check_images/usability_guardrail.png" alt="Chat where the typed card number now reads [card number removed], with a safety reply and a lock notice." />
+        <p class="caption">
+          A message containing a card number was blocked before reaching the AI. The shopper's bubble now reads
+          <strong>"[card number removed]"</strong>, and a safety reply and a 🔒 "not sent to the assistant or saved"
+          notice appear (Problem 9 guardrail).
+        </p>
+      </section>
+
+      <section>
+        <h2>4. Usability: animated underline on product hover <span class="badge">PASS</span></h2>
+        <img class="narrow" src="app_check_images/usability_underline.png" alt="Product card hovered over its image, with its name underlined and a Choose options bar." />
+        <p class="caption">
+          Hovering only the <strong>product image</strong> drew the underline under "Baseball Left Chest Crewneck" (it
+          animates left to right over 0.5s, measured at 100% width) and revealed the "Choose options" bar. The
+          neighboring un-hovered card stays plain.
+        </p>
+      </section>
+
+      <footer>
+        Reproduce with <code>.venv/bin/python scripts/app_check.py</code> from the hw4 folder (servers running). Raw results:
+        <code>app_check_images/results.json</code>.
+      </footer>
+    </main>
+  </body>
+</html>
