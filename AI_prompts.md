@@ -526,3 +526,49 @@ Finalize output/harness.md explaining how the full webpage works. Do not make du
 - **New sections:** models.py reference (every model and constant, linking to existing detail), Safety rules (prompt sections plus code guardrails), Audit trail (schema and append-only behavior), and Agent specs (model, loop and retry limits, result and input caps, memory, repeat detection, run commands, scripts).
 - **Other docs:** added audit rules to `AGENTS.md` and the new files to `README.md`.
 - **Checks:** all internal anchors resolve, and `scripts/app_check.py` still passes 4/4.
+
+# Problem 13: Push to GitHub and submit the URL
+
+## User prompt
+
+```text
+Problem 13: Push to GitHub and submit the URL
+Push the hw4 folder to a public GitHub repo. Important: do not push my Portkey API key, remember to only use variable references rather than the key itself.
+
+Also, do not upload my .env, campus_customs.db, or product image files to the GitHub repo. Use .gitignore. Include .env.example with placeholders only.
+
+Please reference the first image for the expected file layout on Git.
+
+Note that some data will remain local-only, like the database. Use the second image to confirm those files are not pushed.
+
+The agent should be four files in the backend/ folder, which were described in a previous problem (prompts/prompt.md, agent.py, tools.py, models.py).
+
+The README.md file should explain how to run the front- and back-end after placing data in the pack.
+```
+
+(Two images were attached: the expected repo layout, and a local-only `data/` pack holding `campus_customs.db` and `products/`.)
+
+## Assistant response
+
+Asked three questions. The answers: fold the supporting modules into the pictured files; name the repo `mgt409-hw4`; include `scripts/` and `AGENTS.md`.
+
+**Restructure to match the layout:**
+- **Backend:** merged into `main.py` (accounts, chat history, routes), `agent.py` (guardrails, audit trail, agent), `tools.py` (database, catalogue, agent tools), and `models.py` (now also the auth request/response types and `RepeatContext`), plus `prompts/prompt.md`. Lint (ruff) is clean.
+- **Data pack:** moved the database and photos into the git-ignored `data/` folder (`data/campus_customs.db`, `data/products/`, `data/products_web/`). `CAMPUS_CUSTOMS_DATA_DIR` can override the location.
+- **Audit file:** renamed `output/audit-trail.json` to `audit_trail.json` to match the layout, keeping all entries.
+- **Key loading:** the agent now reads `PORTKEY_API_KEY` from `hw4/.env`, falling back to the class-folder `Portkey.env`.
+
+**Retested after the restructure:**
+- products, images, a wrong password (401), login, and saved history (6 messages)
+- registration validation
+- `scripts/app_check.py` 4/4
+- audit appends (14 → 18)
+
+**Repo setup:**
+- Added a `.gitignore` covering env files, `data/`, `*.db`, photos, `.venv`, `node_modules`, and `dist`, plus a placeholder-only `.env.example`.
+- Rewrote `README.md` around the repo layout, the data pack placement, the image-cleaning step, setup, and run commands.
+- Updated the harness, AGENTS.md, and usability.md for the merged files and new paths.
+
+**Safety checks before pushing:** no Portkey key, key-like strings, or real customer emails in any tracked file. 72 files staged, with none forbidden.
+
+**Published:** created the public repo https://github.com/tom-barbaro-som/mgt409-hw4 and pushed. Verified on GitHub: 72 files, visibility PUBLIC, no `.env`, `.db`, `.jpg`, `data/`, `.venv`, or `node_modules`. A fresh clone imported cleanly and read all 102 products once pointed at the local data pack.
